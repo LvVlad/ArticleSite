@@ -2,7 +2,7 @@
     "name": "vladladislavs/article-site",
     "autoload": {
         "psr-4": {
-            "Vladladislavs\\ArticleSite\\": "app/"
+            "App\\": "app/"
         }
     },
     "authors": [
