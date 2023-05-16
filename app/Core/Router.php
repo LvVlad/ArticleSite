@@ -9,12 +9,12 @@ class Router
 {
     private string $PostController = 'App\Controllers\PostController';
 
-    public static function route()
+    public static function response()
     {
         $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $route) {
             $route->addRoute('GET', '/', [$this->PostController, 'articles']);
             $route->addRoute('GET', '/articles', [$this->PostController, 'articles']);
-            $route->addRoute('GET', '/article/{id:\d+}', [$this->PostController, 'singleArticle']);
+            $route->addRoute('GET', '/article/{id:\d+}', [$this->PostController, 'article']);
             $route->addRoute('GET', '/user/{id:\d+}', [$this->PostController, 'user']);
         });
 
