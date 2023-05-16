@@ -20,8 +20,11 @@
             </div>
             <div class="comments">
                 {% for comment in comments %}
+                    <div class="title">
+                        {{ comment.getTitle }}
+                    </div>
                     <div class="author">
-
+                        {{ comment.getEmail }}
                     </div>
                     <div class="comment">
                         {{ comment.getCommentBody }}
