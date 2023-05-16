@@ -1,0 +1,33 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <article class="article" id="{{ article.getId }}" >
+        <div class="container">
+            <div class="title">
+                <h2>
+                    {{ article.getTitle }}
+                </h2>
+            </div>
+            <div class="article-structure">
+                <div class="image">
+                    <img src="{{ article.getImage }}" alt="">
+                </div>
+                <div class="text">
+                    <p>
+                        {{ article.getArticleBody }}
+                    </p>
+                </div>
+            </div>
+            <div class="comments">
+                {% for comment in comments %}
+                    <div class="author">
+
+                    </div>
+                    <div class="comment">
+                        {{ comment.getCommentBody }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </article>
+{% endblock %}

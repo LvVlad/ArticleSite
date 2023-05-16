@@ -7,15 +7,14 @@ use App\Controllers\PostController;
 
 class Router
 {
-    private string $PostController = 'App\Controllers\PostController';
 
     public static function response()
     {
         $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $route) {
-            $route->addRoute('GET', '/', [$this->PostController, 'articles']);
-            $route->addRoute('GET', '/articles', [$this->PostController, 'articles']);
-            $route->addRoute('GET', '/article/{id:\d+}', [$this->PostController, 'article']);
-            $route->addRoute('GET', '/user/{id:\d+}', [$this->PostController, 'user']);
+            $route->addRoute('GET', '/', ['App\Controllers\PostController', 'articles']);
+            $route->addRoute('GET', '/articles', ['App\Controllers\PostController', 'articles']);
+            $route->addRoute('GET', '/article/{id:\d+}', ['App\Controllers\PostController', 'article']);
+            $route->addRoute('GET', '/user/{id:\d+}', ['App\Controllers\PostController', 'user']);
         });
 
         $httpMethod = $_SERVER['REQUEST_METHOD'];

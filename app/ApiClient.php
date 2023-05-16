@@ -37,7 +37,7 @@ class ApiClient
             $allArticles = [];
             foreach (json_decode($response) as $article)
             {
-                $allArticles = $this->createArticle($article);
+                $allArticles[] = $this->createArticle($article);
             }
             return $allArticles;
         }
@@ -67,7 +67,7 @@ class ApiClient
             $articleComments = [];
             foreach (json_decode($response) as $comment)
             {
-                $singleArticleComments = $this->createComment($comment);
+                $articleComments[] = $this->createComment($comment);
             }
             return $articleComments;
         }
@@ -135,7 +135,7 @@ class ApiClient
             $article->id,
             $article->title,
             $article->body,
-            'https://placehold.co/600x400/green/white/?text=Codelex'
+            'https://placehold.co/600x400/green/white/?text=Code'
         );
     }
 

@@ -20,9 +20,9 @@ class PostController
         return new View('articles', ['articles' => $articles]);
     }
 
-    public function article(int $id): View
+    public function article(array $variables): View
     {
-        $article = $this->client->getArticle($id);
+        $article = $this->client->getArticle((int)implode('',$variables));
         $comments = $this->client->getComments($article->getId());
         return new View('article', ['article' => $article, 'comments' => $comments]);
     }

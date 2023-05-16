@@ -1,27 +1,26 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-    <style>
-        .column {
-            column-count: 3;
-        }
-    </style>
 
     <h2>Hottest news:</h2>
     <div class="column">
         {% for article in articles %}
-            <div>
-                <article class="characterCard__Wrapper-sc-1ejywvi-0 bEklxv">
-                    <div class="characterCard__ImgWrapper-sc-1ejywvi-1 fkUcVI"><img src="{{ article.getImage() }}" alt="{{ article.getTitle() }}"></div>
-                    <div class="characterCard__ContentWrapper-sc-1ejywvi-2 ldvrky">
-                        <div class="section">articles
-                            <a>
-                                <h2>{{ article.getTitle() }}</h2>
-                            </a><span class="status"><span class="status__icon"></span> {{ article.getArticleBody() }}</span>
+            <article class="article" id="{{ article.getId }}" >
+                <div class="container">
+                    <div class="title">
+                        <h2>{{ article.getTitle }}</h2>
+                    </div>
+                    <div class="article-structure">
+                        <div class="image">
+                            <img src="{{ article.getImage }}" alt="">
+                        </div>
+                        <div class="text">
+                            <span>'Placeholder for time it was posted an author'</span>
+                            <a href="/article/{{ article.getId }}">Read more...</a>
                         </div>
                     </div>
-                </article>
-            </div>
+                </div>
+            </article>
         {% endfor %}
     </div>
 
