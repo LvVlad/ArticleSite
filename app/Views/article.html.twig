@@ -12,6 +12,10 @@
                 <div class="image">
                     <img src="{{ article.getImage }}" alt="">
                 </div>
+                <div class="author">
+                    Author's username is:
+                    <a href="/user/{{ author.getId }}">{{ author.getUsername }}</a>
+                </div>
                 <div class="text">
                     <p>
                         {{ article.getArticleBody }}

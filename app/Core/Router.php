@@ -3,12 +3,11 @@
 namespace App\Core;
 
 use FastRoute;
-use App\Controllers\ArticleController;
 
 class Router
 {
 
-    public static function response()
+    public static function response(): ?View
     {
         $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $route) {
             $route->addRoute('GET', '/', ['App\Controllers\ArticleController', 'index']);

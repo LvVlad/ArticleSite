@@ -14,9 +14,10 @@ class UserController
         $this->client = new ApiClient();
     }
 
-    public function show(int $id): View
+    public function show(array $variables): View
     {
-        $user = $this->client->getUser($id);
+        $userId = $variables['id'] ?? null;
+        $user = $this->client->getUser((int)$userId);
         return new View('user', ['user' => $user]);
     }
 }

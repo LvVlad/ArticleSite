@@ -25,6 +25,7 @@ class ArticleController
         $articleId = $variables['id'] ?? null;
         $article = $this->client->getArticle((int)$articleId);
         $comments = $this->client->getComments($article->getId());
-        return new View('article', ['article' => $article, 'comments' => $comments]);
+        $author = $this->client->getUser($article->getUserId());
+        return new View('article', ['article' => $article, 'comments' => $comments, 'author' => $author]);
     }
 }

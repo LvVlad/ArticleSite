@@ -7,7 +7,6 @@ use App\Models\Comment;
 use App\Models\User;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use http\Client\Request;
 
 class ApiClient
 {
@@ -106,20 +105,26 @@ class ApiClient
     {
         try
         {
-            $cacheKey = 'user_' . $id;
-            if (Cache::has($cacheKey))
+            $userCacheKey = 'user_' . $id;
+            $articleCacheKey = 'user_' . $id . '_articles';
+            if (Cache::has($userCacheKey))
             {
-                $response = Cache::get($cacheKey);
+                $userInfoResponse = Cache::get($userCacheKey);
+                $userArticlesResponse = Cache::get($articleCacheKey);
             }
             else
             {
-                $request = $this->client->request
+                $userInfoRequest = $this->client->request
                 ('GET', "https://jsonplaceholder.typicode.com/users/{$id}");
-                $response = $request->getBody()->getContents();
-                Cache::remember($cacheKey, $response);
-            }
+                $userInfoResponse = $userInfoRequest->getBody()->getContents();
+                Cache::remember($userCacheKey, $userInfoResponse);
 
-            return $this->createUser(json_decode($response));
+                $userArticlesRequest = $this->client->request
+                ('GET', "https://jsonplaceholder.typicode.com/users/{$id}/posts");
+                $userArticlesResponse = $userArticlesRequest->getBody()->getContents();
+                Cache::remember($articleCacheKey, $userArticlesResponse);
+            }
+            return $this->createUser(json_decode($userInfoResponse), json_decode($userArticlesResponse));
         }
         catch (GuzzleException $exception)
         {
@@ -139,14 +144,15 @@ class ApiClient
         );
     }
 
-    private function createUser(\stdClass $user): User
+    private function createUser(\stdClass $user, array $userArticles): User
     {
         return new User
         (
             $user->id,
             $user->name,
             $user->username,
-            $user->email
+            $user->email,
+            $userArticles
         );
     }
 

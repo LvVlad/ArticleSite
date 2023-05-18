@@ -8,19 +8,22 @@ class User
     private string $name;
     private string $username;
     private string $email;
+    private array $articles;
 
     public function __construct
     (
         int $id,
         string $name,
         string $username,
-        string $email
+        string $email,
+        array $articles
     )
     {
         $this->id = $id;
         $this->name = $name;
         $this->username = $username;
         $this->email = $email;
+        $this->articles = $articles;
     }
 
     public function getId(): int
@@ -41,5 +44,22 @@ class User
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getArticles(): array
+    {
+        $articles= [];
+        foreach ($this->articles as $article)
+        {
+            $articles[] = new Article
+            (
+                $article->userId,
+                $article->id,
+                $article->title,
+                $article->body,
+                'https://placehold.co/600x400/green/white/?text=Code'
+            );
+        }
+        return $articles;
     }
 }

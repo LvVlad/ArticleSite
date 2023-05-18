@@ -4,13 +4,29 @@
 
     <div class="row">
         <div class="card">
-            <img src="https://placehold.co/400"
+            <img src="https://placehold.co/400" alt="Image Not Found">
             <h1>{{ user.getName }}</h1>
             <p class="username">{{ user.getUsername }}</p>
             <p class="email">{{ user.getEmail }}</p>
         </div>
         <div class="article-list">
-
+            {% for article in user.getArticles %}
+                <article class="article" id="{{ article.getId }}" >
+                    <div class="container">
+                        <div class="title">
+                            <h2>{{ article.getTitle }}</h2>
+                        </div>
+                        <div class="article-structure">
+                            <div class="image">
+                                <img src="{{ article.getImage }}" alt="">
+                            </div>
+                            <div class="text">
+                                <a href="/article/{{ article.getId }}">Read more...</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
         </div>
     </div>
 
