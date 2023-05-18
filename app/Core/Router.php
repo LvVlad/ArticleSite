@@ -3,7 +3,7 @@
 namespace App\Core;
 
 use FastRoute;
-use App\Controllers\PostController;
+use App\Controllers\ArticleController;
 
 class Router
 {
@@ -11,10 +11,10 @@ class Router
     public static function response()
     {
         $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $route) {
-            $route->addRoute('GET', '/', ['App\Controllers\PostController', 'articles']);
-            $route->addRoute('GET', '/articles', ['App\Controllers\PostController', 'articles']);
-            $route->addRoute('GET', '/article/{id:\d+}', ['App\Controllers\PostController', 'article']);
-            $route->addRoute('GET', '/user/{id:\d+}', ['App\Controllers\PostController', 'user']);
+            $route->addRoute('GET', '/', ['App\Controllers\ArticleController', 'index']);
+            $route->addRoute('GET', '/articles', ['App\Controllers\ArticleController', 'index']);
+            $route->addRoute('GET', '/article/{id:\d+}', ['App\Controllers\ArticleController', 'show']);
+            $route->addRoute('GET', '/user/{id:\d+}', ['App\Controllers\UserController', 'show']);
         });
 
         $httpMethod = $_SERVER['REQUEST_METHOD'];
@@ -36,9 +36,8 @@ class Router
                 $handler = $routeInfo[1];
                 $vars = $routeInfo[2];
                 [$controller, $method] = $handler;
-                $controller = new PostController;
-                return $controller->{$method}($vars);
+                return (new $controller)->{$method}($vars);
         }
-        return 'is it working?';
+        return null;
     }
 }

@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\ApiClient;
 use App\Core\View;
 
-class PostController
+class ArticleController
 {
     private ApiClient $client;
 
@@ -14,22 +14,17 @@ class PostController
         $this->client = new ApiClient();
     }
 
-    public function articles(): View
+    public function index(): View
     {
         $articles = $this->client->getAllArticles();
         return new View('articles', ['articles' => $articles]);
     }
 
-    public function article(array $variables): View
+    public function show(array $variables): View
     {
-        $article = $this->client->getArticle((int)implode('',$variables));
+        $articleId = $variables['id'] ?? null;
+        $article = $this->client->getArticle((int)$articleId);
         $comments = $this->client->getComments($article->getId());
         return new View('article', ['article' => $article, 'comments' => $comments]);
-    }
-
-    public function user(int $id): View
-    {
-        $user = $this->client->getUser($id);
-        return new View('user', ['user' => $user]);
     }
 }
