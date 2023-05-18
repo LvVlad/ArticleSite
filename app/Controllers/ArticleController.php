@@ -4,28 +4,41 @@ namespace App\Controllers;
 
 use App\ApiClient;
 use App\Core\View;
+use App\Services\Article\IndexArticleService;
+use App\Services\Article\Show\ShowArticleRequest;
+use App\Services\Article\Show\ShowArticleService;
+use http\Exception\RuntimeException;
 
 class ArticleController
 {
-    private ApiClient $client;
-
-    public function __construct()
-    {
-        $this->client = new ApiClient();
-    }
-
     public function index(): View
     {
-        $articles = $this->client->getAllArticles();
+        $service = new IndexArticleService();
+        $articles = $service->execute();
+
         return new View('articles', ['articles' => $articles]);
     }
 
-    public function show(array $variables): View
+    public function show(array $variables): ?View
     {
-        $articleId = $variables['id'] ?? null;
-        $article = $this->client->getArticle((int)$articleId);
-        $comments = $this->client->getComments($article->getId());
-        $author = $this->client->getUser($article->getUserId());
-        return new View('article', ['article' => $article, 'comments' => $comments, 'author' => $author]);
+        try
+        {
+            $articleId = $variables['id'] ?? null;
+            $service = new ShowArticleService();
+            $response = $service->execute(new ShowArticleRequest((int)$articleId));
+        }
+        catch (RuntimeException $exception)
+        {
+            return null;
+        }
+
+        return new View
+        ('article',
+            [
+                'article' => $response->getArticle(),
+                'comments' => $response->getComments(),
+                'author' => $response->getAuthor()
+            ]
+        );
     }
 }

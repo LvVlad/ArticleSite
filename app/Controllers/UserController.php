@@ -2,22 +2,26 @@
 
 namespace App\Controllers;
 
-use App\ApiClient;
 use App\Core\View;
+use App\Services\User\Show\ShowUserRequest;
+use App\Services\User\Show\ShowUserService;
 
 class UserController
 {
-    private ApiClient $client;
 
-    public function __construct()
+    public function show(array $variables): ?View
     {
-        $this->client = new ApiClient();
-    }
+        try
+        {
+            $userId = $variables['id'] ?? null;
+            $service = new ShowUserService();
+            $response = $service->execute(new ShowUserRequest((int)$userId));
 
-    public function show(array $variables): View
-    {
-        $userId = $variables['id'] ?? null;
-        $user = $this->client->getUser((int)$userId);
-        return new View('user', ['user' => $user]);
+            return new View('user', ['user' => $response->getUser()]);
+        }
+        catch (\Exception $exception)
+        {
+            return null;
+        }
     }
 }
