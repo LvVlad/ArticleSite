@@ -1,15 +1,15 @@
-# Simple article/post/blog type site
+# Simple article type site
 
-## 3 functional pages for home (all articles), single article view and user info access from comments and articles.
+## Three functional pages for home (all articles), single article view and author info access from articles.
 
 //Unfinished for now:
-* Ability to go to user info page from comment or post
 * Nonexisten CSS and proper user inteface
 
 Functionality this project has:
 * Home page allows you to see placeholder images, titles and associated links to full article
 * Single article page with functional homepage button, placeholder image display and full text connected to said title
 * On article page there is also comment section with all comments, titles and users emails
+* Also while in single artical view you can click on authors username to check his profile
 * All above is also cached localy for 100 seconds
 
 ## How to install
