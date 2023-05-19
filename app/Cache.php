@@ -8,7 +8,7 @@ class Cache
 {
     public static function remember(string $key, string $data, int $ttl = 100): void
     {
-        $cacheFileName = '../cache/' . $key;
+        $cacheFileName = realpath(__DIR__. "/../cache/").'/'. $key;
 
         file_put_contents($cacheFileName, json_encode
         ([
@@ -20,17 +20,17 @@ class Cache
 
     public static function has(string $key): bool
     {
-        if(!file_exists('../cache/'.$key))
+        if(!file_exists(realpath(__DIR__.'/../cache/').'/' . $key))
         {
             return false;
         }
-        $content = json_decode(file_get_contents('../cache/' . $key));
+        $content = json_decode(file_get_contents(realpath(__DIR__.'/../cache/').'/' . $key));
         return (new Carbon($content->ttl)) > (Carbon::now());
     }
 
     public static function forget(string $key): void
     {
-        unlink('../cache/' . $key);
+        unlink(realpath(__DIR__.'/../cache/').'/' . $key);
     }
 
     public static function get(string $key): ?string
@@ -40,7 +40,7 @@ class Cache
             return null;
         }
 
-        $content = json_decode(file_get_contents('../cache/' . $key));
+        $content = json_decode(file_get_contents(realpath(__DIR__.'/../cache/').'/' . $key));
         return $content->data;
     }
 }
