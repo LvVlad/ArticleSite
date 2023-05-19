@@ -2,12 +2,11 @@
 
 namespace App\Controllers;
 
-use App\ApiClient;
 use App\Core\View;
+use App\Exceptions\IdNotFoundException;
 use App\Services\Article\IndexArticleService;
 use App\Services\Article\Show\ShowArticleRequest;
 use App\Services\Article\Show\ShowArticleService;
-use http\Exception\RuntimeException;
 
 class ArticleController
 {
@@ -27,7 +26,7 @@ class ArticleController
             $service = new ShowArticleService();
             $response = $service->execute(new ShowArticleRequest((int)$articleId));
         }
-        catch (RuntimeException $exception)
+        catch (IdNotFoundException $exception)
         {
             return null;
         }

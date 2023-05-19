@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\View;
+use App\Exceptions\IdNotFoundException;
 use App\Services\User\Show\ShowUserRequest;
 use App\Services\User\Show\ShowUserService;
 
@@ -19,7 +20,7 @@ class UserController
 
             return new View('user', ['user' => $response->getUser()]);
         }
-        catch (\Exception $exception)
+        catch (IdNotFoundException $exception)
         {
             return null;
         }
