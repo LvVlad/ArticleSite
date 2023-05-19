@@ -10,6 +10,7 @@ Functionality this project has:
 * Single article page with functional homepage button, placeholder image display and full text connected to said title
 * On article page there is also comment section with all comments, titles and users emails
 * Also while in single artical view you can click on authors username to check his profile
+* Some of the basic functions also can be called from console, for more info type `php console.php` in terminal
 * All above is also cached localy for 100 seconds
 
 ## How to install
