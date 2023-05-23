@@ -2,20 +2,21 @@
 
 namespace App\Services\User\Show;
 
-use App\ApiClient;
+use App\Repositories\User\JsonPlaceholderUserRepository;
+use App\Repositories\User\UserRepository;
 
 class ShowUserService
 {
-    private ApiClient $client;
+    private UserRepository $userRepository;
 
     public function __construct()
     {
-        $this->client = new ApiClient();
+        $this->userRepository = new JsonPlaceholderUserRepository();
     }
 
     public function execute(ShowUserRequest $request): ShowUserResponse
     {
-        $user = $this->client->getUser($request->getUserId());
+        $user = $this->userRepository->show($request->getUserId());
         return new ShowUserResponse($user);
     }
 }

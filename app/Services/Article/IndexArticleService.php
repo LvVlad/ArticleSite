@@ -2,19 +2,20 @@
 
 namespace App\Services\Article;
 
-use App\ApiClient;
+use App\Repositories\Article\ArticleRepository;
+use App\Repositories\Article\JsonPlaceholderArticleRepository;
 
 class IndexArticleService
 {
-    private ApiClient $client;
+    private ArticleRepository $articleRepository;
 
     public function __construct()
     {
-        $this->client = new ApiClient();
+        $this->articleRepository = new JsonPlaceholderArticleRepository();
     }
 
     public function execute(): array
     {
-        return $this->client->getAllArticles();
+        return $this->articleRepository->index();
     }
 }
