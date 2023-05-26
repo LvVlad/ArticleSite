@@ -3,10 +3,7 @@
 namespace App\Services\Article\Show;
 
 use App\Repositories\Article\ArticleRepository;
-use App\Repositories\Article\JsonPlaceholderArticleRepository;
 use App\Repositories\Comments\CommentsRepository;
-use App\Repositories\Comments\JsonPlaceholderCommentsRepository;
-use App\Repositories\User\JsonPlaceholderUserRepository;
 use App\Repositories\User\UserRepository;
 
 class ShowArticleService
@@ -15,11 +12,16 @@ class ShowArticleService
     private UserRepository $userRepository;
     private CommentsRepository $commentsRepository;
 
-    public function __construct()
+    public function __construct
+    (
+        ArticleRepository $articleRepository,
+        UserRepository $userRepository,
+        CommentsRepository $commentsRepository
+    )
     {
-        $this->articleRepository = new JsonPlaceholderArticleRepository();
-        $this->userRepository = new JsonPlaceholderUserRepository();
-        $this->commentsRepository = new JsonPlaceholderCommentsRepository();
+        $this->articleRepository = $articleRepository;
+        $this->userRepository = $userRepository;
+        $this->commentsRepository = $commentsRepository;
     }
 
     public function execute(ShowArticleRequest $request): ShowArticleResponse

@@ -9,14 +9,19 @@ use App\Services\User\Show\ShowUserService;
 
 class UserController
 {
+    private ShowUserService $showUserService;
+
+    public function __construct(ShowUserService $showUserService)
+    {
+        $this->showUserService = $showUserService;
+    }
 
     public function show(array $variables): ?View
     {
         try
         {
             $userId = $variables['id'] ?? null;
-            $service = new ShowUserService();
-            $response = $service->execute(new ShowUserRequest((int)$userId));
+            $response = $this->showUserService->execute(new ShowUserRequest((int)$userId));
 
             return new View('user', ['user' => $response->getUser()]);
         }

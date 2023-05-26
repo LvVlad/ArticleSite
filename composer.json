@@ -17,6 +17,6 @@
         "guzzlehttp/guzzle": "^7.6",
         "nesbot/carbon": "^2.66",
         "ext-json": "*",
-        "ext-http": "*"
+        "php-di/php-di": "^6.4"
     }
 }

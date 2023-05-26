@@ -6,9 +6,10 @@ use FastRoute;
 
 class Router
 {
-
     public static function response(): ?View
     {
+        $container = (new Container())->getContainer();
+
         $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $route) {
             $route->addRoute('GET', '/', ['App\Controllers\ArticleController', 'index']);
             $route->addRoute('GET', '/articles', ['App\Controllers\ArticleController', 'index']);
@@ -34,8 +35,10 @@ class Router
             case FastRoute\Dispatcher::FOUND:
                 $handler = $routeInfo[1];
                 $vars = $routeInfo[2];
-                [$controller, $method] = $handler;
-                return (new $controller)->{$method}($vars);
+                [$controllerName, $methodName] = $handler;
+                $controller = $container->get($controllerName);
+
+                return $controller->{$methodName}($vars);
         }
         return null;
     }

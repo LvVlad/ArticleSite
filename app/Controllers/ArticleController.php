@@ -10,10 +10,22 @@ use App\Services\Article\Show\ShowArticleService;
 
 class ArticleController
 {
+    private IndexArticleService $indexArticleService;
+    private ShowArticleService $showArticleService;
+
+    public function __construct
+    (
+        IndexArticleService $indexArticleService,
+        ShowArticleService $showArticleService
+    )
+    {
+        $this->indexArticleService = $indexArticleService;
+        $this->showArticleService = $showArticleService;
+    }
+
     public function index(): View
     {
-        $service = new IndexArticleService();
-        $articles = $service->execute();
+        $articles = $this->indexArticleService->execute();
 
         return new View('articles', ['articles' => $articles]);
     }
@@ -23,8 +35,7 @@ class ArticleController
         try
         {
             $articleId = $variables['id'] ?? null;
-            $service = new ShowArticleService();
-            $response = $service->execute(new ShowArticleRequest((int)$articleId));
+            $response = $this->showArticleService->execute(new ShowArticleRequest((int)$articleId));
         }
         catch (IdNotFoundException $exception)
         {
