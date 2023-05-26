@@ -12,6 +12,7 @@ Functionality this project has:
 * Also while in single artical view you can click on authors username to check his profile
 * Some of the basic functions also can be called from console, for more info type `php console.php` in terminal
 * All above is also cached localy for 100 seconds
+* MVC, Interface and Repository/Service pattern were properly implemented
 
 ## How to install
 1) Open this repository file in code editor (PhPStorm)
