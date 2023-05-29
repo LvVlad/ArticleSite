@@ -7,10 +7,19 @@ use App\Services\Article\IndexArticleService;
 
 class IndexArticleCommand
 {
+    private IndexArticleService $indexArticleService;
+
+    public function __construct
+    (
+        IndexArticleService $indexArticleService,
+    )
+    {
+        $this->indexArticleService = $indexArticleService;
+    }
+
     public function execute(): void
     {
-        $service = new IndexArticleService();
-        $articles = $service->execute();
+        $articles = $this->indexArticleService->execute();
         $this->format($articles);
     }
 

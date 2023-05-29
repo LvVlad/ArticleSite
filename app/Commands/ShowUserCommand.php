@@ -9,10 +9,16 @@ use App\Services\User\Show\ShowUserService;
 
 class ShowUserCommand
 {
+    private ShowUserService $showUserService;
+
+    public function __construct(ShowUserService $showUserService)
+    {
+        $this->showUserService = $showUserService;
+    }
+
     public function execute(int $articleId): void
     {
-        $service = new ShowUserService();
-        $user = $service->execute(new ShowUserRequest($articleId))->getUser();
+        $user = $this->showUserService->execute(new ShowUserRequest($articleId))->getUser();
         $this->format($user);
     }
 

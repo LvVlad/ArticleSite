@@ -8,10 +8,16 @@ use App\Services\Article\Show\ShowArticleService;
 
 class ShowArticleCommand
 {
+    private ShowArticleService $showArticleService;
+
+    public function __construct(ShowArticleService $showArticleService)
+    {
+        $this->showArticleService = $showArticleService;
+    }
+
     public function execute(int $articleId): void
     {
-        $service = new ShowArticleService();
-        $article = $service->execute(new ShowArticleRequest($articleId))->getArticle();
+        $article = $this->showArticleService->execute(new ShowArticleRequest($articleId))->getArticle();
         $this->format($article);
     }
 

@@ -15,7 +15,7 @@
                             <img src="{{ article.getImage }}" alt="">
                         </div>
                         <div class="text">
-                            <span>'Placeholder for time it was posted and author'</span>
+                            <span>{{ article.getCreatedAt }}</span>
                             <a href="/article/{{ article.getId }}">Read more...</a>
                         </div>
                     </div>

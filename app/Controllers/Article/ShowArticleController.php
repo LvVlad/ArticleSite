@@ -1,33 +1,22 @@
 <?php declare(strict_types=1);
 
-namespace App\Controllers;
+namespace app\Controllers\Article;
 
 use App\Core\View;
 use App\Exceptions\IdNotFoundException;
-use App\Services\Article\IndexArticleService;
 use App\Services\Article\Show\ShowArticleRequest;
 use App\Services\Article\Show\ShowArticleService;
 
-class ArticleController
+class ShowArticleController
 {
-    private IndexArticleService $indexArticleService;
     private ShowArticleService $showArticleService;
 
     public function __construct
     (
-        IndexArticleService $indexArticleService,
         ShowArticleService $showArticleService
     )
     {
-        $this->indexArticleService = $indexArticleService;
         $this->showArticleService = $showArticleService;
-    }
-
-    public function index(): View
-    {
-        $articles = $this->indexArticleService->execute();
-
-        return new View('articles', ['articles' => $articles]);
     }
 
     public function show(array $variables): ?View
@@ -40,6 +29,7 @@ class ArticleController
         catch (IdNotFoundException $exception)
         {
             return null;
+            //todo add notFound or error View
         }
 
         return new View

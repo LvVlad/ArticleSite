@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+
 class Article
 {
     private int $userId;
@@ -9,6 +11,7 @@ class Article
     private string $title;
     private string $articleBody;
     private string $image;
+    private string $createdAt;
 
     public function __construct
     (
@@ -16,7 +19,8 @@ class Article
         int $id,
         string $title,
         string $articleBody,
-        string $image
+        string $image,
+        string $createdAt = null
     )
     {
         $this->userId = $userId;
@@ -24,6 +28,7 @@ class Article
         $this->title = $title;
         $this->articleBody = $articleBody;
         $this->image = $image;
+        $this->createdAt = $createdAt ?? Carbon::now()->format("d-l H:i");
     }
 
     public function getUserId(): int
@@ -49,5 +54,10 @@ class Article
     public function getImage(): string
     {
         return $this->image;
+    }
+
+    public function getCreatedAt(): string
+    {
+        return $this->createdAt;
     }
 }
