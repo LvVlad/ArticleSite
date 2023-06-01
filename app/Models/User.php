@@ -54,10 +54,11 @@ class User
             $articles[] = new Article
             (
                 $article->userId,
-                $article->id,
                 $article->title,
                 $article->body,
-                'https://placehold.co/600x400/green/white/?text=Code'
+                'https://placehold.co/600x400/green/white/?text=Code',
+                null,
+                $article->id
             );
         }
         return $articles;

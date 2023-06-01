@@ -7,38 +7,33 @@ use Carbon\Carbon;
 class Article
 {
     private int $userId;
-    private int $id;
     private string $title;
     private string $articleBody;
     private string $image;
-    private string $createdAt;
+    private ?string $createdAt;
+    private ?int $id;
 
     public function __construct
     (
         int $userId,
-        int $id,
         string $title,
         string $articleBody,
-        string $image,
-        string $createdAt = null
+        string $image = 'https://placehold.co/600x400/green/white/?text=NEW',
+        ?string $createdAt = null,
+        ?int $id = null
     )
     {
         $this->userId = $userId;
-        $this->id = $id;
         $this->title = $title;
         $this->articleBody = $articleBody;
         $this->image = $image;
         $this->createdAt = $createdAt ?? Carbon::now()->format("d-l H:i");
+        $this->id = $id;
     }
 
     public function getUserId(): int
     {
         return $this->userId;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function getTitle(): string
@@ -59,5 +54,10 @@ class Article
     public function getCreatedAt(): string
     {
         return $this->createdAt;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 }

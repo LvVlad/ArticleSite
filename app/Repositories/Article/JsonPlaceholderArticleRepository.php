@@ -45,11 +45,11 @@ class JsonPlaceholderArticleRepository implements ArticleRepository
         }
     }
 
-    public function show(int $postId): ?Article
+    public function show(int $articleId): ?Article
     {
         try
         {
-            $cacheKey = 'article_' . $postId;
+            $cacheKey = 'article_' . $articleId;
             if (Cache::has($cacheKey))
             {
                 $response = Cache::get($cacheKey);
@@ -57,7 +57,7 @@ class JsonPlaceholderArticleRepository implements ArticleRepository
             else
             {
                 $request = $this->client->request
-                ('GET', "https://jsonplaceholder.typicode.com/posts/{$postId}");
+                ('GET', "https://jsonplaceholder.typicode.com/posts/{$articleId}");
                 $response = $request->getBody()->getContents();
                 Cache::remember($cacheKey, $response);
             }

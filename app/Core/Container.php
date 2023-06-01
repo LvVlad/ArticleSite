@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use App\Repositories\Article\ArticleRepository;
+use App\Repositories\Article\DoctrineDbalArticleRepository;
 use App\Repositories\Article\JsonPlaceholderArticleRepository;
 use App\Repositories\Comments\CommentsRepository;
 use App\Repositories\Comments\JsonPlaceholderCommentsRepository;
@@ -18,9 +19,9 @@ class Container
     {
         $this->builder = new ContainerBuilder();
         $this->builder->addDefinitions([
-            ArticleRepository::class => new JsonPlaceholderArticleRepository(),
+            ArticleRepository::class => new DoctrineDbalArticleRepository(),
             UserRepository::class => new JsonPlaceholderUserRepository(),
-            CommentsRepository::class => new JsonPlaceholderCommentsRepository()
+            CommentsRepository::class => new JsonPlaceholderCommentsRepository(),
         ]);
     }
 

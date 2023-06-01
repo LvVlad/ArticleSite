@@ -1,0 +1,26 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <div class="Conteiner">
+        <form method="post" action="/articles">
+            <h3>Create Article</h3>
+            <div>
+                <label>
+                    Title
+                </label>
+                <input type="text" name="title">
+            </div>
+            <div>
+                <label>
+                    Body
+                </label>
+                <textarea name="body"></textarea>
+            </div>
+            <div>
+                <button>
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

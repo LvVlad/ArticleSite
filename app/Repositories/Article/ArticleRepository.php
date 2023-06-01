@@ -7,5 +7,5 @@ use App\Models\Article;
 interface ArticleRepository
 {
     public function index(): array;
-    public function show(int $postId): ?Article;
+    public function show(int $articleId): ?Article;
 }
