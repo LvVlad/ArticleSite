@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Controllers;
+namespace App\Controllers\User;
 
 use App\Core\View;
 use App\Exceptions\IdNotFoundException;

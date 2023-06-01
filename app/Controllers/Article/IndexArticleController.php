@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace app\Controllers\Article;
+namespace App\Controllers\Article;
 
 use App\Core\View;
-use App\Services\Article\IndexArticleService;
+use App\Services\Article\Index\IndexArticleService;
 
 class IndexArticleController
 {

@@ -25,7 +25,7 @@ class Container
         ]);
     }
 
-    public function getContainer()
+    public function getContainer(): \DI\Container
     {
         return $this->builder->build();
     }

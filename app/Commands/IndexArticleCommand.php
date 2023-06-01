@@ -3,7 +3,7 @@
 namespace App\Commands;
 
 use App\Models\Article;
-use App\Services\Article\IndexArticleService;
+use app\Services\Article\Index\IndexArticleService;
 
 class IndexArticleCommand
 {
