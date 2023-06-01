@@ -25,7 +25,7 @@ class CreateArticleService
             $request->getTitle(),
             $request->getBody()
         );
-        //$this->articleRepository->save();
+        $this->articleRepository->store($article);
         return new CreateArticleResponse($article);
     }
 }

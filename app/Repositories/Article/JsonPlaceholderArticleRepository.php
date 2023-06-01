@@ -70,6 +70,16 @@ class JsonPlaceholderArticleRepository implements ArticleRepository
         }
     }
 
+    public function store(Article $article): ?Article
+    {
+        return null;
+    }
+
+    public function edit(Article $article): ?Article
+    {
+        return null;
+    }
+
     private function createModel(\stdClass $article): Article
     {
         return new Article

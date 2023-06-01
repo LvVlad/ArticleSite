@@ -8,4 +8,6 @@ interface ArticleRepository
 {
     public function index(): array;
     public function show(int $articleId): ?Article;
+    public function store(Article $article): ?Article;
+    public function edit(Article $article): ?Article;
 }

@@ -2,7 +2,9 @@
 
 namespace App\Core;
 
-class View
+use App\Core\Redirect\Response;
+
+class View implements Response
 {
     private string $template;
     private array $data;

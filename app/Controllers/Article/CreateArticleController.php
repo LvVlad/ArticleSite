@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Article;
 
+use App\Core\Redirect\Redirect;
 use App\Core\View;
 use App\Services\Article\Create\CreateArticleRequest;
 use App\Services\Article\Create\CreateArticleService;
@@ -23,11 +24,13 @@ class CreateArticleController
         return new View('create', []);
     }
 
-    public function store()
+    public function store(): Redirect
     {
         $title = $_POST['title'];
         $body = $_POST['body'];
 
         $article = $this->createArticleService->execute(new CreateArticleRequest($title, $body));
+
+        return new Redirect('/article/'.$article->getArticle()->getId());
     }
 }

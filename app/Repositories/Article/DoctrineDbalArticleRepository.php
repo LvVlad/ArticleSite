@@ -46,6 +46,40 @@ class DoctrineDbalArticleRepository implements ArticleRepository
         return $this->createModel($article);
     }
 
+    public function store(Article $article): Article
+    {
+        $this->builder
+            ->insert('articles')
+            ->values
+            ([
+                'user_id'=>'?',
+                'title'=>'?',
+                'body'=>'?',
+                'created_at'=>'?'
+            ])
+            ->setParameter(0, $article->getUserId())
+            ->setParameter(1, $article->getTitle())
+            ->setParameter(2, $article->getArticleBody())
+            ->setParameter(3, $article->getCreatedAt())
+            ->executeStatement();
+
+        $article->setId((int)($this->connection->lastInsertId()));
+        return $article;
+    }
+
+    public function edit(Article $article): ?Article
+    {
+        $this->builder
+            ->update('articles')
+            ->set('title', '?')
+            ->set('body', '?')
+            ->where('id', '?')
+            ->setParameter(0, $article->getTitle())
+            ->setParameter(1, $article->getArticleBody())
+            ->setParameter(2, $article->getId())
+            ->executeStatement();
+    }
+
     private function createModel(array $article): Article
     {
         return new Article

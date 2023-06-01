@@ -2,11 +2,13 @@
 
 namespace App\Core;
 
+use App\Core\Redirect\Redirect;
+use App\Core\Redirect\Response;
 use FastRoute;
 
 class Router
 {
-    public static function response(array $routes): ?View
+    public static function response(array $routes): ?Response
     {
         $container = (new Container())->getContainer();
 
@@ -44,6 +46,6 @@ class Router
 
                 return $controller->{$methodName}($vars);
         }
-        return null;
+        return new Redirect('/');
     }
 }

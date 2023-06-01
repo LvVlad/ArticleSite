@@ -10,5 +10,5 @@ return
         ['GET', '/article/create', ['App\Controllers\Article\CreateArticleController', 'create']],
         ['POST', '/articles', ['App\Controllers\Article\CreateArticleController', 'store']],
         //Display User
-        ['GET', '/user/{id:\d+}', ['App\Controllers\User\UserController', 'show']],
+        ['GET', '/user/{id:\d+}', ['App\Controllers\User\ShowUserController', 'show']],
     ];

@@ -7,7 +7,7 @@ use App\Exceptions\IdNotFoundException;
 use App\Services\User\Show\ShowUserRequest;
 use App\Services\User\Show\ShowUserService;
 
-class UserController
+class ShowUserController
 {
     private ShowUserService $showUserService;
 
