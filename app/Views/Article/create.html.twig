@@ -1,20 +1,20 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-    <div class="Conteiner">
+    <div class="Container">
         <form method="post" action="/articles">
             <h3>Create Article</h3>
             <div>
                 <label>
                     Title
+                    <input type="text" name="title">
                 </label>
-                <input type="text" name="title">
             </div>
             <div>
                 <label>
+                    <textarea name="body"></textarea>
                     Body
                 </label>
-                <textarea name="body"></textarea>
             </div>
             <div>
                 <button>

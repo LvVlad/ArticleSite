@@ -65,4 +65,11 @@ class Article
     {
         $this->id = $id;
     }
+
+    public function getSnippet(): string
+    {
+        $array = explode(' ', $this->articleBody);
+        $snippet = implode(' ', $array);
+        return $snippet.'...';
+    }
 }
